@@ -4,6 +4,4 @@
 
 #export HYPERSHIFT_IMAGE=quay.io/cveiga/hypershift:gcp-hcp-pilot-6977ae03 
 
-#export CLUSTER_NAME=my-cluster-$(date +%s)
-
 #export HYPERSHIFT_BINARY=/path/to/local/hypershift/binary

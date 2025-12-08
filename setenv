@@ -1,5 +1,14 @@
 # this script is sourced by all others
 
+# Logging functions
+_gcp_hcp_info() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S %Z')] ℹ️  $*"
+}
+
+_gcp_hcp_error() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S %Z')] ❌ $*" >&2
+}
+
 # Source setenv.local if it exists (for user overrides)
 # Use a local variable to avoid overwriting caller's SCRIPT_DIR
 _SETENV_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -26,11 +35,6 @@ if [[ -z ${PROJECT_ID:-} ]]; then
     read -rp "Project ID [$DEFAULT_NAME]: " PROJECT_ID
     PROJECT_ID=${PROJECT_ID:-$DEFAULT_NAME}
     export PROJECT_ID
-fi
-
-# ensure CLUSTER_NAME follows 15 char limit (use same default as PROJECT_ID)
-if [[ -z ${CLUSTER_NAME:-} ]]; then
-    export CLUSTER_NAME="$PROJECT_ID"
 fi
 
 # default billing account ID to HCM's

@@ -1,0 +1,9 @@
+#export FOLDER_ID=162671966169
+
+# export PROJECT_ID=hcp-demo-patmarti-1764956027
+
+#export HYPERSHIFT_IMAGE=quay.io/cveiga/hypershift:gcp-hcp-pilot-6977ae03 
+
+#export CLUSTER_NAME=my-cluster-$(date +%s)
+
+#export HYPERSHIFT_BINARY=/path/to/local/hypershift/binary

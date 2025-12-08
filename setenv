@@ -1,0 +1,46 @@
+# this script is sourced by all others
+
+# Source setenv.local if it exists (for user overrides)
+# Use a local variable to avoid overwriting caller's SCRIPT_DIR
+_SETENV_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+if [[ -f "$_SETENV_DIR/setenv.local" ]]; then
+    # shellcheck disable=SC1091
+    source "$_SETENV_DIR/setenv.local"
+fi
+unset _SETENV_DIR
+
+# Generate a random suffix for unique naming
+if [[ -z ${RANDOM_SUFFIX:-} ]]; then
+    RANDOM_SUFFIX=$(printf "%05d" $((RANDOM % 100000)))
+fi
+
+# Truncate username to max 8 chars
+SHORT_USER="${USER:0:8}"
+
+# Default name format: <user:8>-<random:5> = max 14 chars (under 15 char limit)
+DEFAULT_NAME="${SHORT_USER}-${RANDOM_SUFFIX}"
+
+# ensure the PROJECT_ID environment variable is set
+if [[ -z ${PROJECT_ID:-} ]]; then
+    echo "no PROJECT_ID set, which project do you want to use or create?"
+    read -rp "Project ID [$DEFAULT_NAME]: " PROJECT_ID
+    PROJECT_ID=${PROJECT_ID:-$DEFAULT_NAME}
+    export PROJECT_ID
+fi
+
+# ensure CLUSTER_NAME follows 15 char limit (use same default as PROJECT_ID)
+if [[ -z ${CLUSTER_NAME:-} ]]; then
+    export CLUSTER_NAME="$PROJECT_ID"
+fi
+
+# default billing account ID to HCM's
+if [[ -z ${BILLING_ACCOUNT_ID:-} ]]; then
+    export BILLING_ACCOUNT_ID="010E03-6A7177-A264C0"
+fi
+
+# default folder ID to gcp-hcp-demo folder
+if [[ -z ${FOLDER_ID:-} ]]; then
+    export FOLDER_ID="640919390272"
+fi
+
+export GCP_HCP_REGION=us-central1

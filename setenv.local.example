@@ -1,7 +1,11 @@
-#export FOLDER_ID=162671966169
+# Override default folder ID
+#export FOLDER_ID=640919390272
 
-# export PROJECT_ID=hcp-demo-patmarti-1764956027
+# Override default billing account
+#export BILLING_ACCOUNT_ID=010E03-6A7177-A264C0
 
-#export HYPERSHIFT_IMAGE=quay.io/cveiga/hypershift:gcp-hcp-pilot-6977ae03 
+# Use a custom hypershift image
+#export HYPERSHIFT_IMAGE=quay.io/cveiga/hypershift:gcp-hcp-pilot-6977ae03
 
+# Use a local hypershift binary instead of downloading
 #export HYPERSHIFT_BINARY=/path/to/local/hypershift/binary

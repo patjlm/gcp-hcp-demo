@@ -9,8 +9,17 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck disable=SC1091
 source "$SCRIPT_DIR/setenv"
 
+# Check for required PROJECT_ID parameter
+if [ $# -eq 0 ]; then
+    _gcp_hcp_error "Usage: $0 <project-id>"
+    _gcp_hcp_error "Example: $0 my-gcp-project"
+    exit 1
+fi
+
+PROJECT_ID="$1"
+
 _gcp_hcp_info "Step 0: Initialize GCP Project"
-_gcp_hcp_info "This script will create or verify a GCP project, link billing, and enable required APIs"
+_gcp_hcp_info "This script will create or verify GCP project '$PROJECT_ID', link billing, and enable required APIs"
 echo
 
 # ensure gcloud is installed

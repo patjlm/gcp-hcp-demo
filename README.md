@@ -13,20 +13,20 @@ Quick demo to create a Hypershift hosted cluster on GCP.
 Run all steps in one go:
 
 ```bash
-./ALL.sh <cluster-name>
+./ALL.sh <project-id> <cluster-name>
 ```
 
 Example:
 ```bash
-./ALL.sh my-cluster
+./ALL.sh my-gcp-project my-cluster
 ```
 
 Or run step-by-step:
 
 ```bash
-./00-init-project.sh              # Create GCP project and enable services
-./01-setup-gcphcp-cli.sh          # Install gcphcp CLI and hypershift binary
-./02-create-cluster.sh my-cluster # Create hosted cluster
+./00-init-project.sh my-gcp-project              # Create GCP project and enable services
+./01-setup-gcphcp-cli.sh my-gcp-project          # Install gcphcp CLI and hypershift binary
+./02-create-cluster.sh my-gcp-project my-cluster # Create hosted cluster
 ```
 
 **Note:** Cluster name must be 15 characters or less.
@@ -36,8 +36,8 @@ Or run step-by-step:
 Create `setenv.local` to override defaults:
 
 ```bash
-export PROJECT_ID=my-custom-project
 export FOLDER_ID=123456789012
+export BILLING_ACCOUNT_ID=XXXXXX-XXXXXX-XXXXXX
 ```
 
 See `setenv.local.example` for all options.

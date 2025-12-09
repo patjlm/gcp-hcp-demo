@@ -18,25 +18,6 @@ if [[ -f "$_SETENV_DIR/setenv.local" ]]; then
 fi
 unset _SETENV_DIR
 
-# Generate a random suffix for unique naming
-if [[ -z ${RANDOM_SUFFIX:-} ]]; then
-    RANDOM_SUFFIX=$(printf "%05d" $((RANDOM % 100000)))
-fi
-
-# Truncate username to max 8 chars
-SHORT_USER="${USER:0:8}"
-
-# Default name format: <user:8>-<random:5> = max 14 chars (under 15 char limit)
-DEFAULT_NAME="${SHORT_USER}-${RANDOM_SUFFIX}"
-
-# ensure the PROJECT_ID environment variable is set
-if [[ -z ${PROJECT_ID:-} ]]; then
-    echo "no PROJECT_ID set, which project do you want to use or create?"
-    read -rp "Project ID [$DEFAULT_NAME]: " PROJECT_ID
-    PROJECT_ID=${PROJECT_ID:-$DEFAULT_NAME}
-    export PROJECT_ID
-fi
-
 # default billing account ID to HCM's
 if [[ -z ${BILLING_ACCOUNT_ID:-} ]]; then
     export BILLING_ACCOUNT_ID="010E03-6A7177-A264C0"
@@ -45,6 +26,10 @@ fi
 # default folder ID to gcp-hcp-demo folder
 if [[ -z ${FOLDER_ID:-} ]]; then
     export FOLDER_ID="640919390272"
+fi
+
+if [[ -z ${CLS_API_GATEWAY_URL:-} ]]; then
+    export CLS_API_GATEWAY_URL="https://cls-backend-gateway-9gpamuy7.uc.gateway.dev"
 fi
 
 export GCP_HCP_REGION=us-central1

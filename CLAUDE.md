@@ -11,14 +11,16 @@ Provides a simple, batteries-included demo of the GCP HCP platform that anyone c
 - **Simplicity above all** - Make it as easy as possible to get started
 - **Bash scripts** - Simple, readable, no complex tooling required
 - **Minimal dependencies** - Only require what's absolutely necessary (gcloud, gcphcp CLI)
-- **Sensible defaults** - Works out-of-the-box without extensive configuration
-- **Anyone can use it** - Clear instructions, interactive prompts when needed
+- **Explicit over implicit** - No magic, all parameters are explicit and visible
+- **Sensible defaults** - Common configuration has reasonable defaults that can be overridden
+- **Anyone can use it** - Clear instructions and helpful error messages
 - **Idempotent operations** - Safe to re-run scripts multiple times
+- **Reproducible** - Same inputs produce same results, no hidden state
 
 ## Design Goals
 
 - Demonstrate the complete lifecycle of a hosted cluster
-- Require minimal user input
-- Be self-documenting through clear script names and prompts
+- Be self-documenting through clear script names and usage messages
 - Fail fast with helpful error messages
 - Keep it DRY with shared configuration
+- No interactive prompts - fully scriptable and automatable

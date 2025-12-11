@@ -56,7 +56,7 @@ if [ ! -f "$SCRIPT_DIR/hypershift" ]; then
             exit 1
         fi
 
-        : "${HYPERSHIFT_IMAGE:=quay.io/cveiga/hypershift:gcp-hcp-pilot-1b3adfea}"
+        : "${HYPERSHIFT_IMAGE:=quay.io/cveiga/hypershift:gcp-hcp-pilot-062b7763}"
         _gcp_hcp_info "Hypershift binary not found, downloading it from $HYPERSHIFT_IMAGE with $CONTAINER_CLI..."
         $CONTAINER_CLI run --rm --entrypoint cat "$HYPERSHIFT_IMAGE" /usr/bin/hypershift > "$SCRIPT_DIR/hypershift"
     fi
@@ -68,8 +68,9 @@ _gcp_hcp_info "Hypershift binary is set up."
 
 _gcp_hcp_info "Configuring gcphcp CLI..."
 gcphcp config set default_project "$PROJECT_ID"
-# setting the integration us-central1 endpoint
-gcphcp config set api_endpoint "${CLS_API_GATEWAY_URL}"
+# Not setting the API endpoint so we can run this script in parallel targeting multiple environments/regions
+# We use `--api-endpoint "$CLS_API_GATEWAY_URL"` everywhere instead
+# gcphcp config set api_endpoint "${CLS_API_GATEWAY_URL}"
 gcphcp config set hypershift_binary "$SCRIPT_DIR/hypershift"
 gcphcp config list
 

@@ -5,7 +5,7 @@
 #export BILLING_ACCOUNT_ID=010E03-6A7177-A264C0
 
 # Use a custom hypershift image
-#export HYPERSHIFT_IMAGE=quay.io/cveiga/hypershift:gcp-hcp-pilot-6977ae03
+#export HYPERSHIFT_IMAGE=quay.io/cveiga/hypershift:gcp-hcp-pilot-062b7763
 
 # Use a local hypershift binary instead of downloading
 #export HYPERSHIFT_BINARY=/path/to/local/hypershift/binary

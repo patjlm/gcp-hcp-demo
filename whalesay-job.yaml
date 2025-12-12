@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: whalesay
+spec:
+  template:
+    spec:
+      containers:
+      - name: whalesay
+        image: docker/whalesay
+        command: ["cowsay"]
+        args: ["Hello GCP-HCP!"]
+      restartPolicy: Never
+  backoffLimit: 3
+

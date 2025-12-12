@@ -9,3 +9,6 @@
 
 # Use a local hypershift binary instead of downloading
 #export HYPERSHIFT_BINARY=/path/to/local/hypershift/binary
+
+# CLS endpoint
+#export GCPHCP_API_ENDPOINT=https://cls-backend-gateway-9gpamuy7.uc.gateway.dev

@@ -29,7 +29,7 @@ _gcp_hcp_info "This script will create a Hypershift hosted cluster named '$CLUST
 echo
 
 _gcp_hcp_info "Creating cluster '$CLUSTER_NAME'..."
-gcphcp --api-endpoint "$CLS_API_GATEWAY_URL" clusters create \
+gcphcp --api-endpoint "$GCPHCP_API_ENDPOINT" clusters create \
     --project "$PROJECT_ID" --region "$GCP_HCP_REGION" \
     --endpoint-access PublicAndPrivate \
     --setup-infra \
@@ -38,11 +38,11 @@ gcphcp --api-endpoint "$CLS_API_GATEWAY_URL" clusters create \
 
 _gcp_hcp_info "Cluster creation initiated successfully!"
 
-watch "gcphcp --api-endpoint $CLS_API_GATEWAY_URL clusters status $CLUSTER_NAME --all"
+watch "gcphcp --api-endpoint $GCPHCP_API_ENDPOINT clusters status $CLUSTER_NAME --all"
 
 # Wait until the API Endpoint is available
 _gcp_hcp_info "Waiting for cluster API endpoint to become available..."
-until API_URL=$(gcphcp --api-endpoint "$CLS_API_GATEWAY_URL" --format json clusters status "$CLUSTER_NAME" --all | jq -r '.controller_status[0].conditions[] | select(.type == "APIServer") | .message') && [ -n "$API_URL" ] && [ "$API_URL" != "null" ]; do
+until API_URL=$(gcphcp --api-endpoint "$GCPHCP_API_ENDPOINT" --format json clusters status "$CLUSTER_NAME" --all | jq -r '.controller_status[0].conditions[] | select(.type == "APIServer") | .message') && [ -n "$API_URL" ] && [ "$API_URL" != "null" ]; do
     pprintf "."
     sleep 5
 done
@@ -50,7 +50,7 @@ echo
 
 # Extract and display the API URL endpoint
 _gcp_hcp_info "Extracting cluster API endpoint..."
-API_URL=$(gcphcp --api-endpoint "$CLS_API_GATEWAY_URL" --format json clusters status "$CLUSTER_NAME" --all | jq -r '.controller_status[0].conditions[] | select(.type == "APIServer") | .message')
+API_URL=$(gcphcp --api-endpoint "$GCPHCP_API_ENDPOINT" --format json clusters status "$CLUSTER_NAME" --all | jq -r '.controller_status[0].conditions[] | select(.type == "APIServer") | .message')
 
 if [ -n "$API_URL" ] && [ "$API_URL" != "null" ]; then
     echo

@@ -28,8 +28,8 @@ if [[ -z ${FOLDER_ID:-} ]]; then
     export FOLDER_ID="640919390272"
 fi
 
-if [[ -z ${CLS_API_GATEWAY_URL:-} ]]; then
-    export CLS_API_GATEWAY_URL="https://cls-backend-gateway-9gpamuy7.uc.gateway.dev"
+if [[ -z ${GCPHCP_API_ENDPOINT:-} ]]; then
+    export GCPHCP_API_ENDPOINT="https://cls-backend-gateway-9gpamuy7.uc.gateway.dev"
 fi
 
 export GCP_HCP_REGION=us-central1

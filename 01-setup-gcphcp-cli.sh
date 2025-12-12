@@ -69,8 +69,8 @@ _gcp_hcp_info "Hypershift binary is set up."
 _gcp_hcp_info "Configuring gcphcp CLI..."
 gcphcp config set default_project "$PROJECT_ID"
 # Not setting the API endpoint so we can run this script in parallel targeting multiple environments/regions
-# We use `--api-endpoint "$CLS_API_GATEWAY_URL"` everywhere instead
-# gcphcp config set api_endpoint "${CLS_API_GATEWAY_URL}"
+# We use `--api-endpoint "$GCPHCP_API_ENDPOINT"` everywhere instead
+# gcphcp config set api_endpoint "${GCPHCP_API_ENDPOINT}"
 gcphcp config set hypershift_binary "$SCRIPT_DIR/hypershift"
 gcphcp config list
 

@@ -22,7 +22,7 @@ echo
 
 # Get cluster status to extract API URL
 _gcp_hcp_info "Retrieving cluster API endpoint..."
-API_URL=$(gcphcp --api-endpoint "$CLS_API_GATEWAY_URL" --format json clusters status "$CLUSTER_NAME" --all | jq -r '.controller_status[0].conditions[] | select(.type == "APIServer") | .message')
+API_URL=$(gcphcp --api-endpoint "$GCPHCP_API_ENDPOINT" --format json clusters status "$CLUSTER_NAME" --all | jq -r '.controller_status[0].conditions[] | select(.type == "APIServer") | .message')
 
 if [ -z "$API_URL" ] || [ "$API_URL" == "null" ]; then
     _gcp_hcp_error "Could not retrieve API endpoint for cluster '$CLUSTER_NAME'"
